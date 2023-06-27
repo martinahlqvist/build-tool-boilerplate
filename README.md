@@ -1,5 +1,5 @@
 # Build Tool Boilerplate
-A simple boilerplate for using NPM tasks to build and compile JavaScript, CSS, and image files.
+A simple boilerplate for using NPM tasks to build and compile JavaScript and CSS.
 
 _Version 2 adds `watch` and `server` tasks, and removes the need for Windows-specific tasks._
 
@@ -10,13 +10,11 @@ _Version 2 adds `watch` and `server` tasks, and removes the need for Windows-spe
 
 **Quick Start**
 
-Each task has just one or two dependencies (*except for image optimization*), so I recommend deleting the ones you don't need before running `npm install`. Learn more in [the documentation](#documentation) below.
+Each task has just one or two dependencies, so I recommend deleting the ones you don't need before running `npm install`. Learn more in [the documentation](#documentation) below.
 
 1. In bash/terminal/command line, `cd` into your project directory.
 2. Run `npm install`.
 3. Run `npm run build`.
-
-
 
 ## Documentation
 
