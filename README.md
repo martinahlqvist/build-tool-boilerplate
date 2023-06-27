@@ -22,7 +22,7 @@ Each task has just one or two dependencies (*except for image optimization*), so
 
 This is a boilerplate that you can use as a starting point for your projects.
 
-[Running Tasks](#running-tasks) · [JavaScript](#javascript) · [Sass => CSS](#sass--css) · [SVG Optimization](#svg-optimization) · [Image Optimization](#image-optimization) · [Copy Files](#copy-files) · [Clean](#clean) · [Complete Build](#complete-build) · [Watch for Changes](#watch-for-changes) · [Server](#server)
+[Running Tasks](#running-tasks) · [JavaScript](#javascript) · [Sass => CSS](#sass--css) · [Copy Files](#copy-files) · [Clean](#clean) · [Complete Build](#complete-build) · [Watch for Changes](#watch-for-changes) · [Server](#server)
 
 
 ### Running Tasks
@@ -33,8 +33,6 @@ The boilerplate uses the `npm run` command to run tasks. These work on macOS, Li
 # Main Tasks
 npm run js     # compile and minify
 npm run css    # compile and minify Sass into CSS
-npm run svg    # optimize SVGs with SVGO
-npm run img    # optimize image files
 npm run copy   # copy files from the src/copy directory as-is into /dist
 npm run clean  # delete the /dist directory
 npm run build  # run all tasks
@@ -44,8 +42,6 @@ npm run server # run a localhost server that reloads when files change
 # Modular Tasks
 npm run watch-js     # watch for changes to the /js directory
 npm run watch-css    # watch for changes to the /css directory
-npm run watch-svg    # watch for changes to the /svg directory
-npm run watch-img    # watch for changes to the /img directory
 npm run watch-copy   # watch for changes to the /copy directory
 npm run build-dirty  # run a new build without deleting the /dist directory
 npm run server-start # start a server without watching for changes
@@ -158,57 +154,6 @@ npm run css
 
 _**Note for FireFox users:** ensure that ['Use Source Maps'](https://github.com/cferdinandi/build-tool-boilerplate/issues/7#issuecomment-811432626), and ['Show original sources'](https://github.com/cferdinandi/build-tool-boilerplate/issues/7#issuecomment-811855711) options are enabled in Developer Tools._
 
-### SVG Optimization
-
-The boilerplate uses [svgo](https://github.com/svg/svgo) to remove the cruft that gets added to SVG files by many editors.
-
-```json
-{
-    "devDependencies": {
-        "svgo": "^1.3.2"
-    }
-}
-```
-
-For accessibility reasons, the boilerplate disables the settings that remove the `title` element and `viewBox` attribute.
-
-You can make additional command line configurations under the `svg` tasks in the `scripts` property of the `package.json` file.
-
-```bash
-svgo -f src/svg dist/svg -r --disable=removeViewBox,removeTitle
-```
-
-SVGs should be in the `src/svg` directory. Use this task to run the build.
-
-```bash
-npm run svg
-```
-
-
-### Image Optimization
-
-The boilerplate uses [imagemin](https://www.npmjs.com/package/imagemin), with the [MozJPEG](https://github.com/imagemin/imagemin-mozjpeg), [pngcrush](https://github.com/imagemin/imagemin-pngcrush), [pngquant](https://github.com/imagemin/imagemin-pngquant), and [zopfli](https://github.com/imagemin/imagemin-zopfli) plugins.
-
-(*Yea, that's kind of lot, isn't it?*)
-
-```json
-{
-    "devDependencies": {
-        "imagemin-cli": "^6.0.0",
-        "imagemin-mozjpeg": "^8.0.0",
-        "imagemin-pngcrush": "^6.0.0",
-        "imagemin-pngquant": "^8.0.0",
-        "imagemin-zopfli": "^6.0.0"
-    }
-}
-```
-
-Image files should be in the `src/img` directory. Use this task to run the build.
-
-```bash
-npm run img
-```
-
 ### Copy Files
 
 The boilerplate uses [recursive-fs](https://github.com/simov/recursive-fs) to provide a cross-OS copying solution. This package is also used for the `clean` task, so only remove it if you're deleting both tasks.
@@ -268,7 +213,7 @@ Regardless of which task you use, be sure to delete any tasks you're not using f
 
 ```bash
 # default build-dirty task
-npm-run-all -p js css svg img copy
+npm-run-all -p js css copy
 ```
 
 
@@ -295,8 +240,6 @@ If you only want to watch for changes to a specific directory in `/src`, you can
 ```bash
 npm run watch-js   # watch for changes to the /js directory
 npm run watch-css  # watch for changes to the /css directory
-npm run watch-svg  # watch for changes to the /svg directory
-npm run watch-img  # watch for changes to the /img directory
 npm run watch-copy # watch for changes to the /copy directory
 ```
 
