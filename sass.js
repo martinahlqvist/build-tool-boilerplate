@@ -1,6 +1,7 @@
 var sass = require('sass');
 var fs = require('fs');
 var pkg = require('./package.json');
+var chalk = require('chalk');
 
 
 // Configs
@@ -12,7 +13,7 @@ var configs = {
 	indentType: 'tab',
 	indentWidth: 1,
 	minify: true,
-	sourceMap: false
+	sourceMap: true
 };
 
 // Banner
@@ -23,21 +24,23 @@ var getOptions = function (file, filename, minify) {
 		file: `${configs.pathIn}/${file}`,
 		outFile: `${configs.pathOut}/${filename}`,
 		sourceMap: configs.sourceMap,
-        	sourceMapContents: configs.sourceMap,
+        sourceMapContents: configs.sourceMap,
 		indentType: configs.indentType,
 		indentWidth: configs.indentWidth,
 		outputStyle: minify ? 'compressed' : 'expanded'
 	};
 };
 
-var writeFile = function (pathOut, fileName, fileData, printBanner = true) {
+var writeFile
+ = function (pathOut, fileName, fileData, printBanner = true) {
     // Create the directory path
     fs.mkdir(pathOut, { recursive: true }, function (err) {
         // If there's an error, throw it
         if (err) throw err;
 
         // Write the file to the path
-        fs.writeFile(`${pathOut}/${fileName}`, fileData, function (err) {
+        fs.writeFile
+        (`${pathOut}/${fileName}`, fileData, function (err) {
             if (err) throw err;
 
             var data = fs.readFileSync(`${pathOut}/${fileName}`);
@@ -47,7 +50,7 @@ var writeFile = function (pathOut, fileName, fileData, printBanner = true) {
             fs.writeSync(fd, data, 0, data.length, insert.length);
             fs.close(fd, function (err) {
                 if (err) throw err;
-                console.log(`Compiled ${pathOut}/${fileName}`);
+                console.log(chalk.blue('Compiled     :'), chalk.cyan(`${pathOut}/${fileName}`));
             })
         })
     })
@@ -55,6 +58,11 @@ var writeFile = function (pathOut, fileName, fileData, printBanner = true) {
 
 var parseSass = function (file, minify) {
     var filename = `${file.slice(0, file.length - 5)}${minify ? '.min' : ''}.css`;
+    console.log(chalk.blue('Compiling    :'), chalk.yellow(`${configs.pathIn}/${file}`), chalk.blue('to'), chalk.yellow(`${configs.pathOut}/${filename}`));
+    console.log(chalk.blue('Output style :'), chalk.yellow(`${minify ? 'compressed' : 'expanded'}`));
+    console.log(chalk.blue('Source map   :'), chalk.yellow(`${configs.sourceMap}`));
+   
+
     sass.render(getOptions(file, filename, minify), function (err, result) {
 
 	// If there's an error, throw it
