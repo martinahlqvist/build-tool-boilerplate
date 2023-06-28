@@ -18,6 +18,9 @@
         "copy": "recursive-copy 'src/copy' 'dist'",
         "build-dirty": "npm-run-all -p js css copy",
         "build": "npm-run-all -s clean build-dirty",
+        "waTestBuild": "cd './src/webApps/test' && npm run build",
+        "waPuffBuild": "cd './src/webApps/puff' && npm run build",
+        "build-webapps": "concurrently \"npm run waTestBuild\" \"npm run waPuffBuild\"",
         "watch-css": "chokidar './src/**/*.scss' -c 'npm run css'",
         "watch-js": "chokidar './src/**/*.js' -c 'npm run js'",
         "watch-copy": "chokidar './src/copy/**/*.*' -c 'npm run copy'",
@@ -34,5 +37,9 @@
         "rollup-plugin-terser": "^7.0.2",
         "sass": "^1.26.5",
         "svgo": "^3.0.2"
+    },
+    "dependencies": {
+        "concurrently": "^8.2.0",
+        "@sitevision/sitevision-scripts": "^3.3.1"
     }
 }
