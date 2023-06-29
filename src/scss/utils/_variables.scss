@@ -1,0 +1,42 @@
+// --- FONTS START ------------------------------------------------ */
+// --- Font family -------------- */
+$brandon: 'BrandonTextWeb-Bold',sans-serif;
+$open-sans: 'Open Sans',sans-serif;
+$font-awesome: "Font Awesome 5 Pro";
+
+// --- Font size ---------------- */
+$normal: 1rem;
+$h1: 3.125rem;
+$h2: 1.75rem;
+$h3: 1.5rem;
+$small: 0.875rem;
+$decoration-heading: 1.313rem;
+
+// --- Font weight -------------- */
+$regular: 400;
+$bold: 600;
+$black: 900;
+$light: 300; // font-awesome-pro-icons */
+
+// --- FONTS END -------------------------------------------------- */
+// --- COLORS START ----------------------------------------------- */
+
+$primary: #0B3A38;
+$secondary: #0B3A38;
+// Primärfärgen med 30% opacitet
+$light-border-color: #B5C3C3;
+
+// --- COLORS END ------------------------------------------------- */
+// --- BOX-SHADOW & BORDERS START --------------------------------- */
+
+$box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.15);
+$light-border: solid 1px $light-border-color;
+
+// --- BOX-SHADOW & BORDERS END ----------------------------------- */
+// --- TRANSITIONS & ANIMATIONS START ----------------------------- */
+
+$transition-fade: all 0.5s linear;
+$transition-fast: all 0.2s linear;
+$arrow-slide: all 0.3s ease;
+
+// --- TRANSITIONS & ANIMATIONS END ------------------------------- */
