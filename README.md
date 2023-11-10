@@ -2,11 +2,6 @@
 
 The purpose of this boilerplate is to provide a simple, lightweight, and resilient build tool for your projects specifically with Sitevision CMS in mind.
 
-## Install
-
-- [Install Node.js.](http://nodejs.org/)
-- [Download the NPM Build Tool Boilerplate.](https://github.com/cferdinandi/build-tool-boilerplate/archive/master.zip)
-
 ## Quick Start
 
 Each task has just one or two dependencies, so I recommend deleting the ones you don't need before running `npm install`. Learn more in [the documentation](#documentation) below.
@@ -27,124 +22,53 @@ The boilerplate uses the `npm run` command to run tasks. These work on macOS, Li
 
 ```bash
 # Main Tasks
-npm run js     # compile and minify
-npm run css    # compile and minify Sass into CSS
-npm run copy   # copy files from the src/copy directory as-is into /dist
-npm run clean  # delete the /dist directory
-npm run build  # run all tasks
-npm run watch  # watch for changes and rebuild
-npm run server # run a localhost server that reloads when files change
+npm run js              # compile and minify
+npm run css             # compile and minify Sass into CSS
+npm run copy            # copy files from the src/copy directory as-is into /dist
+npm run clean           # delete the /dist directory
+npm run build           # run all tasks
+npm run watch           # watch for changes and rebuild
+npm run server          # run a localhost server that reloads when files change
+npm run deploy-files    # deploy files to Sitevision (needs a restApp (file-handler) to be build and configured first)
 
 # Modular Tasks
-npm run watch-js     # watch for changes to the /js directory
-npm run watch-css    # watch for changes to the /css directory
-npm run watch-copy   # watch for changes to the /copy directory
-npm run build-dirty  # run a new build without deleting the /dist directory
-npm run server-start # start a server without watching for changes
+npm run watch-js        # watch for changes to the /js directory
+npm run watch-css       # watch for changes to the /css directory
+npm run watch-copy      # watch for changes to the /copy directory
+npm run build-dirty     # run a new build without deleting the /dist directory
+npm run server-start    # start a server without watching for changes
 ```
 
-### JavaScript
+### JavaScript and CSS
 
 The boilerplate uses [rollup.js](https://rollupjs.org) with the [terser](https://terser.org/) plugin to parse, compile, and minify JavaScript files.
 
-```json
-{
-    "devDependencies": {
-        "rollup": "^2.6.1",
-        "rollup-plugin-terser": "^7.0.2"
-    }
-}
-```
-
-In the `rollup.config.js` file, there's a `configs` object that you can use to control what rollup.js does.
-
-```js
-// Configs
-var configs = {
-    name: 'MyProject',                // Global namespace to use for IIFEs [optional]
-    files: ['main.js', 'detects.js'], // The files to process
-    formats: ['iife', 'es'],          // The formats to output - will be added as a suffix to the filename (ex. main.es.js)
-    default: 'iife',                  // Files with this format will not have a format suffix [optional]
-    pathIn: 'src/js',                 // The source directory for your JS files
-    pathOut: 'dist/js',               // The directory to compile JS files into
-    minify: true,                     // If true, a minified version will also be created with the .min suffix
-    sourceMap: false                  // If true, sourcemaps are created for each processed file †
-};
-```
-
-A banner is automatically generated from your `package.json` data.
-
-It includes the project name and version, a copyright notice with the current year and the package author name, the license type, and a link to the project repository.
-
-_If a `configs.name` property is included, that will be used. If not, the banner defaults to the `name` property in your `package.json` file._
-
-```js
-// Banner
-var banner = `/*! ${configs.name ? configs.name : pkg.name} v${pkg.version} | (c) ${new Date().getFullYear()} ${pkg.author.name} | ${pkg.license} License | ${pkg.repository.url} */`;
-```
-
-To concatentate multiple files into one, use the ES modules `import` feature.
-
-```js
-// myplugin.js
-// This will compile into /dist/js/myplugin.js, and will include helpers.js, app.js, and event-listeners.js
-
-import * as Helpers from './helpers.js';
-import app from './app.js';
-import './event-listeners.js';
-```
-
-JavaScript files should be in the `src/js` directory. Use this task to run the build.
-
-```bash
-npm run js
-```
-
-_**Note for FireFox users:** ensure that ['Use Source Maps'](https://github.com/cferdinandi/build-tool-boilerplate/issues/7#issuecomment-811432626), and ['Show original sources'](https://github.com/cferdinandi/build-tool-boilerplate/issues/7#issuecomment-811855711) options are enabled in Developer Tools._
-
-### Sass => CSS
-
 The boilerplate uses the Node implementation of [dart-sass](https://sass-lang.com/dart-sass) to parse `.scss` files into CSS.
 
-```json
-{
-    "devDependencies": {
-        "sass": "^1.26.5"
-    }
-}
-```
+A banner is automatically generated from your `package.json` data for both JS and CSS files. It includes the project name and version, a copyright notice with the current year and the package author name, the license type, and a link to the project repository.
 
-In the `sass.js` file, there's a `configs` object that you can use to control what `dart-sass` does.
+Also in the `package.json` file, there's a section that you can use to control the src and destination of the JS and SCSS/CSS files.
 
 ```js
 // Configs
-var configs = {
-    name: 'MyProject',    // The name to use in the file banner
-    files: ['main.scss'], // The files to process
-    pathIn: 'src/scss',   // The source directory for your Sass files
-    pathOut: 'dist/css',  // The directory to compile CSS files into
-    indentType: 'tab',    // The type of indenting to use ['tab'|'spaces']
-    indentWidth: 1,       // How many tabs or spaces to indent
-    minify: true,         // If true, a minified version will also be created with the .min suffix
-    sourceMap: false,     // If true, sourcemaps are created for each processed file †
-};
+"configs": {
+    "css": {
+      "pathIn": "src/scss",
+      "pathOut": "dist/css",
+      "minify": true
+    },
+    "js": {
+      "pathIn": "src/js",
+      "pathOut": "dist/js"
+    }
+  },
 ```
-
-A banner is automatically generated from your `package.json` data.
-
-It includes the project name and version, a copyright notice with the current year and the package author name, the license type, and a link to the project repository.
 
 _If a `configs.name` property is included, that will be used. If not, the banner defaults to the `name` property in your `package.json` file._
 
 ```js
 // Banner
 var banner = `/*! ${configs.name ? configs.name : pkg.name} v${pkg.version} | (c) ${new Date().getFullYear()} ${pkg.author.name} | ${pkg.license} License | ${pkg.repository.url} */`;
-```
-
-Sass files should be in the `src/scss` directory. Use this task to run the build.
-
-```bash
-npm run css
 ```
 
 _**Note for FireFox users:** ensure that ['Use Source Maps'](https://github.com/cferdinandi/build-tool-boilerplate/issues/7#issuecomment-811432626), and ['Show original sources'](https://github.com/cferdinandi/build-tool-boilerplate/issues/7#issuecomment-811855711) options are enabled in Developer Tools._
@@ -189,9 +113,7 @@ npm run clean
 
 ### Complete Build
 
-You can run all of your build tasks in a single command.
-
-Use this task to run the build.
+It's possible to upload all JS and CSS files with the `npm run deploy-files`
 
 ```bash
 npm run build
@@ -258,6 +180,27 @@ If you want to run the server _without_ the `watch` task, run this task instead.
 
 ```bash
 npm run server-start
+```
+
+## Upload files to Sitevision
+
+In order to upload files to to the sitevision server you first need to create a restApp that handles the upload. The restApp is called `file-handler` and is located in the `src/restApps` folder. [file-handler read.me](src/restApps/file-handler/README.md).
+
+You also need to create a `.deploy_properties.json` file in the root of the project. This file should contain the following properties:
+
+```json
+{
+    "domain": "http://localhost",
+    "distFolder" : "./dist",
+    "username": "system",
+    "password": "system"
+}
+```
+
+Use this task to upload folder with files.
+
+```bash
+npm run deploy-files
 ```
 
 ## Core Dependencies
