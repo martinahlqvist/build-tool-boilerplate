@@ -1,14 +1,13 @@
 # Build Tool Boilerplate
-A simple boilerplate for using NPM tasks to build and compile JavaScript and CSS.
 
-_Version 2 adds `watch` and `server` tasks, and removes the need for Windows-specific tasks._
+The purpose of this boilerplate is to provide a simple, lightweight, and resilient build tool for your projects specifically with Sitevision CMS in mind.
 
-**Install**
+## Install
 
 - [Install Node.js.](http://nodejs.org/)
 - [Download the NPM Build Tool Boilerplate.](https://github.com/cferdinandi/build-tool-boilerplate/archive/master.zip)
 
-**Quick Start**
+## Quick Start
 
 Each task has just one or two dependencies, so I recommend deleting the ones you don't need before running `npm install`. Learn more in [the documentation](#documentation) below.
 
@@ -21,7 +20,6 @@ Each task has just one or two dependencies, so I recommend deleting the ones you
 This is a boilerplate that you can use as a starting point for your projects.
 
 [Running Tasks](#running-tasks) · [JavaScript](#javascript) · [Sass => CSS](#sass--css) · [Copy Files](#copy-files) · [Clean](#clean) · [Complete Build](#complete-build) · [Watch for Changes](#watch-for-changes) · [Server](#server)
-
 
 ### Running Tasks
 
@@ -44,7 +42,6 @@ npm run watch-copy   # watch for changes to the /copy directory
 npm run build-dirty  # run a new build without deleting the /dist directory
 npm run server-start # start a server without watching for changes
 ```
-
 
 ### JavaScript
 
@@ -190,7 +187,6 @@ You can delete the `/dist` directory before running a build to clean up any junk
 npm run clean
 ```
 
-
 ### Complete Build
 
 You can run all of your build tasks in a single command.
@@ -213,7 +209,6 @@ Regardless of which task you use, be sure to delete any tasks you're not using f
 # default build-dirty task
 npm-run-all -p js css copy
 ```
-
 
 ### Watch for Changes
 
@@ -241,7 +236,6 @@ npm run watch-css  # watch for changes to the /css directory
 npm run watch-copy # watch for changes to the /copy directory
 ```
 
-
 ## Server
 
 The boilerplate uses [Browsersync](https://www.browsersync.io/) to run a local server and automatically update it whenever your files change.
@@ -266,8 +260,6 @@ If you want to run the server _without_ the `watch` task, run this task instead.
 npm run server-start
 ```
 
-
-
 ## Core Dependencies
 
 The boilerplate uses [npm-run-all](https://www.npmjs.com/package/npm-run-all) to run tasks consistently across different operating systems, and in parallel.
@@ -286,16 +278,27 @@ It also allows you to run tasks in parallel. By running all of the tasks in the 
 
 **In other words, don't remove this dependency.**
 
+## Sitevision webapps
 
+In order to create new webApps and restApps follow these steps:
+
+```bash
+# Navigate to src/webapps or src/restapps in the terminal
+cd src/webapps 
+# Create web or rest app with the following command
+npx @sitevision/create-sitevision-app@3 your-app-name
+```
 
 ## Why does this exist?
 
-For years, I've been an avid [Gulp](https://gulpjs.com/) user. Gulp is great. But it's also *a lot*.
+For years, I've been an avid [Gulp](https://gulpjs.com/) user. Gulp is great. But it's also _a lot_.
 
 **I wanted a simpler, more resilient, leaner set of build tools.**
 
 I'm tired of having to repair my build anytime I don't use it for a few months. I'm tired of installing 270mb of `node_modules` dependencies to build a simple website or web app.
 
-With NPM, you can build a simplish build tool that does just what you want (*and nothing more*) with a fraction of the footprint.
+With NPM, you can build a simplish build tool that does just what you want (_and nothing more_) with a fraction of the footprint.
 
-❤️ *Major kudos to Keith Cirkel for [teaching me about this years ago](https://www.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/), before I was ready to hear it.*
+❤️ _This boilerplate is heavily based on [Build Tool Boilerplate](https://github.com/cferdinandi/build-tool-boilerplate) by Chris Ferdinandi (cferdinandi)_
+
+❤️ _Major kudos to Keith Cirkel for [teaching me about this years ago](https://www.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/), before I was ready to hear it._

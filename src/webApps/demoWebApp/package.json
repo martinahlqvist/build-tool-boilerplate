@@ -1,9 +1,9 @@
 {
-  "name": "puff",
+  "name": "demoWebApp",
   "version": "0.0.1",
   "dependencies": {
-    "@sitevision/api": "^2023.5.1",
-    "@sitevision/sitevision-scripts": "^3.3.1",
+    "@sitevision/api": "^2023.9.2",
+    "@sitevision/sitevision-scripts": "^3.3.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -19,7 +19,8 @@
   "eslintConfig": {
     "extends": [
       "@sitevision/eslint-config-recommended",
-      "@sitevision/eslint-config-webapp-react"
+      "@sitevision/eslint-config-webapp-react",
+      "@sitevision/eslint-config-typescript"
     ]
   },
   "prettier": {},

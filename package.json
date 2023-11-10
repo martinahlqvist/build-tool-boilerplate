@@ -1,44 +1,53 @@
 {
-    "name": "build-tool-boilerplate",
-    "version": "1.0.0",
-    "description": "Bygger CSS, JS samt Web- och RestAppar",
-    "author": {
-        "name": "YOUR NAME",
-        "url": "https://url.com"
+  "name": "build-tool-boilerplate",
+  "version": "1.0.0",
+  "description": "Builds CSS, JS plus Web- and RestApps",
+  "author": {
+    "name": "YOUR NAME",
+    "url": "https://url.com"
+  },
+  "license": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/martinahlqvist/build-tool-boilerplate"
+  },
+  "configs": {
+    "css": {
+      "pathIn": "src/scss",
+      "pathOut": "dist/css",
+      "minify": true
     },
-    "license": "",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/martinahlqvist/build-tool-boilerplate"
-    },
-    "scripts": {
-        "clean": "recursive-delete 'dist'",
-        "js": "rollup --config",
-        "css": "node sass.mjs",
-        "copy": "recursive-copy 'src/copy' 'dist'",
-        "build-dirty": "npm-run-all -p js css copy",
-        "build": "npm-run-all -s clean build-dirty",
-        "waTestBuild": "cd './src/webApps/test' && npm run build",
-        "waPuffBuild": "cd './src/webApps/puff' && npm run build",
-        "webapps": "concurrently \"npm run waTestBuild\" \"npm run waPuffBuild\"",
-        "watch-css": "chokidar './src/scss/**/*.scss' -c 'npm run css'",
-        "watch-js": "chokidar './src/js/**/*.js' -c 'npm run js'",
-        "watch-copy": "chokidar './src/copy/**/*.*' -c 'npm run copy'",
-        "watch": "npm-run-all -p build watch-css watch-js watch-copy",
-        "server-start": "browser-sync start --files 'dist' --server 'dist'",
-        "server": "npm-run-all -p watch server-start"
-    },
-    "devDependencies": {
-        "browser-sync": "^2.26.14",
-        "chokidar-cli": "^2.1.0",
-        "npm-run-all": "^4.1.2",
-        "recursive-fs": "^2.1.0",
-        "rollup": "^3.25.3",
-        "rollup-plugin-terser": "^7.0.2",
-        "sass": "^1.26.5"
-    },
-    "dependencies": {
-        "concurrently": "^8.2.0",
-        "@sitevision/sitevision-scripts": "^3.3.1"
+    "js": {
+      "pathIn": "src/js",
+      "pathOut": "dist/js"
     }
+  },
+  "scripts": {
+    "clean": "recursive-delete 'dist'",
+    "js": "node ./launch-scripts/js.mjs",
+    "css": "node ./launch-scripts/sass.mjs",
+    "copy": "recursive-copy 'src/copy' 'dist'",
+    "build-dirty": "npm-run-all -p js css copy",
+    "build": "npm-run-all -s clean build-dirty",
+    "watch-css": "chokidar './src/scss/**/*.scss' -c 'npm run css'",
+    "watch-js": "chokidar './src/js/**/*.js' -c 'npm run js'",
+    "watch-copy": "chokidar './src/copy/**/*.*' -c 'npm run copy'",
+    "watch": "npm-run-all -p build watch-css watch-js watch-copy",
+    "server-start": "browser-sync start --files 'dist' --server 'dist'",
+    "server": "npm-run-all -p watch server-start",
+    "deploy-files": "node ./launch-scripts/deploy-files.mjs"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.14",
+    "chokidar-cli": "^2.1.0",
+    "npm-run-all": "^4.1.2",
+    "prettier": "^3.0.3",
+    "recursive-fs": "^2.1.0",
+    "rollup": "^3.25.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "sass": "^1.26.5"
+  },
+  "dependencies": {
+    "@sitevision/sitevision-scripts": "^3.3.1"
+  }
 }

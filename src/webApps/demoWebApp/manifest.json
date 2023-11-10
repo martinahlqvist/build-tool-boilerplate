@@ -1,8 +1,8 @@
 {
-  "id": "test",
+  "id": "demoWebApp",
   "version": "0.0.1",
   "name": {
-    "en": "test boilerplate"
+    "en": "WebApp boilerplate"
   },
   "author": "My Company",
   "description": {
