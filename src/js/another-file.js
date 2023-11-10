@@ -1,1 +1,1 @@
-console.log('another-file.js file loaded');
+console.log("another-file.js file loaded");

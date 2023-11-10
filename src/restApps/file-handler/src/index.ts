@@ -1,4 +1,4 @@
-// Importerar från Sitevision 
+// Importerar från Sitevision
 import router from "@sitevision/api/common/router";
 import fileUtil from "@sitevision/api/server/FileUtil";
 import nodeTreeUtil from "@sitevision/api/server/NodeTreeUtil";
@@ -41,16 +41,26 @@ function checkForFolder(targetFolderNode: Node, folderName: string): Node {
  * @param uploadContent {IUploadContent} Objekt med namn (name) och url (uri) till filen som ska laddas upp
  * @returns Ett objekt med meddelande (message) och status (success) boolean
  */
-function uploadFileFromUri(targetFolderNode: Node, uploadContent: IUploadContent) {
-  let fileNode: Node = nodeTreeUtil.getNode(targetFolderNode, uploadContent.name);
+function uploadFileFromUri(
+  targetFolderNode: Node,
+  uploadContent: IUploadContent
+) {
+  let fileNode: Node = nodeTreeUtil.getNode(
+    targetFolderNode,
+    uploadContent.name
+  );
   const result: IResult = {
-    "message": "no action",
-    "success": false
+    message: "no action",
+    success: false,
   };
 
   if (fileNode === null) {
     try {
-      fileNode = fileUtil.createFile(targetFolderNode, uploadContent.name, uploadContent.uri);
+      fileNode = fileUtil.createFile(
+        targetFolderNode,
+        uploadContent.name,
+        uploadContent.uri
+      );
       result.message = "New file created";
       result.success = true;
     } catch (e) {
@@ -76,12 +86,11 @@ function uploadFileFromUri(targetFolderNode: Node, uploadContent: IUploadContent
  * @returns Ett objekt med meddelande (message) och status (success) boolean
  */
 function uploadFileFromTemp(targetFolderNode: Node, tempFile: Node) {
-
   const fileName = "" + properties.get(tempFile, "fileName");
   const fileNode: Node = nodeTreeUtil.getNode(targetFolderNode, fileName);
   const result: IResult = {
-    "message": "no action",
-    "success": false
+    message: "no action",
+    success: false,
   };
 
   if (fileNode === null) {
@@ -109,29 +118,33 @@ function uploadFileFromTemp(targetFolderNode: Node, tempFile: Node) {
  * Router för att ladda upp en fil från en extern url till en mapp i filarkivet
  */
 router.post("/createFileFromUri", (req, res) => {
-
-  const targetFolderNode: Node = appData.getNode('targetFolder');
+  const targetFolderNode: Node = appData.getNode("targetFolder");
   const fileName = req.params.fileName;
   const fileUri = req.params.fileUri;
   const subFolder = req.params.subFolder;
 
   let result: IResult = {
-    "message": "no action",
-    "success": false
+    message: "no action",
+    success: false,
   };
 
   if (!fileName || !fileUri) {
     result = {
-      "message": "Missing parameters",
-      "success": false
+      message: "Missing parameters",
+      success: false,
     };
   } else {
-
     if (subFolder) {
       const subFolderNode = checkForFolder(targetFolderNode, subFolder);
-      result = uploadFileFromUri(subFolderNode, { name: fileName, uri: fileUri });
+      result = uploadFileFromUri(subFolderNode, {
+        name: fileName,
+        uri: fileUri,
+      });
     } else {
-      result = uploadFileFromUri(targetFolderNode, { name: fileName, uri: fileUri });
+      result = uploadFileFromUri(targetFolderNode, {
+        name: fileName,
+        uri: fileUri,
+      });
     }
   }
 
@@ -143,15 +156,15 @@ router.post("/createFileFromUri", (req, res) => {
  */
 router.post("/createFileFromTemp", (req, res) => {
   let result: IResult = {
-    "message": "no action",
-    "success": false
+    message: "no action",
+    success: false,
   };
 
-  const targetFolderNode: Node = appData.getNode('targetFolder');
+  const targetFolderNode: Node = appData.getNode("targetFolder");
   const subFolder = req.params.subFolder;
-  const file = req.file('file');
+  const file = req.file("file");
 
-  if (file !== null ) {
+  if (file !== null) {
     if (subFolder !== null || subFolder !== undefined || subFolder !== "") {
       const subFolderNode = checkForFolder(targetFolderNode, subFolder);
       result = uploadFileFromTemp(subFolderNode, file);

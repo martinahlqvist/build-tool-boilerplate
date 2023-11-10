@@ -17,17 +17,17 @@ import chalk from "chalk";
 }
 */
 const deploy_properties = JSON.parse(
-	fs.readFileSync("./.deploy_properties.json")
+  fs.readFileSync("./.deploy_properties.json")
 );
 const postFileToUrl =
-	deploy_properties.domain + "/rest-api/file-handler/createFileFromTemp"; // This is the path to the restApp that handles file uploads. Make sure to enable POST access in Sitevision.
+  deploy_properties.domain + "/rest-api/file-handler/createFileFromTemp"; // This is the path to the restApp that handles file uploads. Make sure to enable POST access in Sitevision.
 
 const axiosInstance = axios.create({
-	baseURL: deploy_properties.domain,
-	auth: {
-		username: deploy_properties.username,
-		password: deploy_properties.password,
-	},
+  baseURL: deploy_properties.domain,
+  auth: {
+    username: deploy_properties.username,
+    password: deploy_properties.password,
+  },
 });
 
 /**
@@ -37,35 +37,35 @@ const axiosInstance = axios.create({
  * @returns true if the file was uploaded successfully
  */
 const postFile = async (file, subfolder) => {
-	const form = new FormData();
-	let success = false;
-	const filePath = deploy_properties.distFolder + "/" + subfolder + "/" + file;
-	form.headers = {
-		"Content-Type": "multipart/form-data",
-	};
-	form.append("file", fs.createReadStream(filePath));
-	form.append("subFolder", subfolder);
-	axiosInstance
-		.post(postFileToUrl, form, {
-			headers: form.getHeaders(),
-		})
-		.then((response) => {
-			if (response.data.success === true) {
-				console.log(
-					chalk.green("Ok 👍  -> "),
-					chalk.magenta(`${subfolder}/${file} (${response.data.message})`)
-				);
-				success = true;
-			} else {
-				console.log(chalk.red(`${subfolder}/${file} didn't upload`));
-				console.log(response.data.message);
-			}
-		})
-		.catch((error) => {
-			console.error("Oops!");
-			console.error(error);
-		});
-	return success;
+  const form = new FormData();
+  let success = false;
+  const filePath = deploy_properties.distFolder + "/" + subfolder + "/" + file;
+  form.headers = {
+    "Content-Type": "multipart/form-data",
+  };
+  form.append("file", fs.createReadStream(filePath));
+  form.append("subFolder", subfolder);
+  axiosInstance
+    .post(postFileToUrl, form, {
+      headers: form.getHeaders(),
+    })
+    .then((response) => {
+      if (response.data.success === true) {
+        console.log(
+          chalk.green("Ok 👍  -> "),
+          chalk.magenta(`${subfolder}/${file} (${response.data.message})`)
+        );
+        success = true;
+      } else {
+        console.log(chalk.red(`${subfolder}/${file} didn't upload`));
+        console.log(response.data.message);
+      }
+    })
+    .catch((error) => {
+      console.error("Oops!");
+      console.error(error);
+    });
+  return success;
 };
 
 /**
@@ -75,26 +75,24 @@ const postFile = async (file, subfolder) => {
  * @returns {Promise<string[]>} - Array of which folder are present in the folder
  */
 const uploadFiles = async (folder, target) => {
-	let files = [];
-	if (!folder) {
-		console.log(chalk.red("No target folder specified."));
-		return files;
-	}
-	try {
-		files = await fs.promises.readdir(folder);
-		console.log(
-			chalk.green(
-				"⏳ Uploading " + files.length + " " + target + "-files"
-			)
-		);
-		for (let i = 0; i < files.length; i++) {
-			let file = files[i];
-			postFile(file, target);
-		}
-		return files;
-	} catch (e) {
-		console.error(e);
-	}
+  let files = [];
+  if (!folder) {
+    console.log(chalk.red("No target folder specified."));
+    return files;
+  }
+  try {
+    files = await fs.promises.readdir(folder);
+    console.log(
+      chalk.green("⏳ Uploading " + files.length + " " + target + "-files")
+    );
+    for (let i = 0; i < files.length; i++) {
+      let file = files[i];
+      postFile(file, target);
+    }
+    return files;
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 /**
@@ -103,22 +101,22 @@ const uploadFiles = async (folder, target) => {
  * @returns {Promise<string[]>} - Array of which folder are present in the folder
  */
 const deployFolders = async (path) => {
-	let folders = [];
-	if (fs.existsSync(path)) {
-		let directoryContents = await fs.promises.readdir(path, {
-			withFileTypes: true,
-		});
-		directoryContents.map(function (dirent) {
-			if (dirent.isDirectory()) {
-				folders.push(dirent.name);
-				let subFolderPath = path + "/" + dirent.name;
-				uploadFiles(subFolderPath, dirent.name);
-			}
-		});
-	} else {
-		console.log(chalk.red("Unable to find folder using that path."));
-	}
-	return folders;
+  let folders = [];
+  if (fs.existsSync(path)) {
+    let directoryContents = await fs.promises.readdir(path, {
+      withFileTypes: true,
+    });
+    directoryContents.map(function (dirent) {
+      if (dirent.isDirectory()) {
+        folders.push(dirent.name);
+        let subFolderPath = path + "/" + dirent.name;
+        uploadFiles(subFolderPath, dirent.name);
+      }
+    });
+  } else {
+    console.log(chalk.red("Unable to find folder using that path."));
+  }
+  return folders;
 };
 
 let folders = await deployFolders(deploy_properties.distFolder);

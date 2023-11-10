@@ -1,1 +1,1 @@
-console.log('detects.js file loaded');
+console.log("detects.js file loaded");

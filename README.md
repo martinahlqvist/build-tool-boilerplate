@@ -68,7 +68,11 @@ _If a `configs.name` property is included, that will be used. If not, the banner
 
 ```js
 // Banner
-var banner = `/*! ${configs.name ? configs.name : pkg.name} v${pkg.version} | (c) ${new Date().getFullYear()} ${pkg.author.name} | ${pkg.license} License | ${pkg.repository.url} */`;
+var banner = `/*! ${configs.name ? configs.name : pkg.name} v${
+  pkg.version
+} | (c) ${new Date().getFullYear()} ${pkg.author.name} | ${
+  pkg.license
+} License | ${pkg.repository.url} */`;
 ```
 
 _**Note for FireFox users:** ensure that ['Use Source Maps'](https://github.com/cferdinandi/build-tool-boilerplate/issues/7#issuecomment-811432626), and ['Show original sources'](https://github.com/cferdinandi/build-tool-boilerplate/issues/7#issuecomment-811855711) options are enabled in Developer Tools._
@@ -79,9 +83,9 @@ The boilerplate uses [recursive-fs](https://github.com/simov/recursive-fs) to pr
 
 ```json
 {
-    "devDependencies": {
-        "recursive-fs": "^2.1.0"
-    }
+  "devDependencies": {
+    "recursive-fs": "^2.1.0"
+  }
 }
 ```
 
@@ -99,9 +103,9 @@ The boilerplate uses [recursive-fs](https://www.npmjs.com/package/recursive-fs) 
 
 ```json
 {
-    "devDependencies": {
-        "recursive-fs": "^2.1.0"
-    }
+  "devDependencies": {
+    "recursive-fs": "^2.1.0"
+  }
 }
 ```
 
@@ -138,9 +142,9 @@ The boilerplate uses [Chokidar CLI](https://www.npmjs.com/package/chokidar-cli) 
 
 ```json
 {
-    "devDependencies": {
-        "chokidar-cli": "^2.1.0"
-    }
+  "devDependencies": {
+    "chokidar-cli": "^2.1.0"
+  }
 }
 ```
 
@@ -164,9 +168,9 @@ The boilerplate uses [Browsersync](https://www.browsersync.io/) to run a local s
 
 ```json
 {
-    "devDependencies": {
-        "browser-sync": "^2.26.14"
-    }
+  "devDependencies": {
+    "browser-sync": "^2.26.14"
+  }
 }
 ```
 
@@ -190,10 +194,10 @@ You also need to create a `.deploy_properties.json` file in the root of the proj
 
 ```json
 {
-    "domain": "http://localhost",
-    "distFolder" : "./dist",
-    "username": "system",
-    "password": "system"
+  "domain": "http://localhost",
+  "distFolder": "./dist",
+  "username": "system",
+  "password": "system"
 }
 ```
 
@@ -209,9 +213,9 @@ The boilerplate uses [npm-run-all](https://www.npmjs.com/package/npm-run-all) to
 
 ```json
 {
-    "devDependencies": {
-        "npm-run-all": "^4.1.5"
-    }
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
 }
 ```
 
@@ -227,7 +231,7 @@ In order to create new webApps and restApps follow these steps:
 
 ```bash
 # Navigate to src/webapps or src/restapps in the terminal
-cd src/webapps 
+cd src/webapps
 # Create web or rest app with the following command
 npx @sitevision/create-sitevision-app@3 your-app-name
 ```
