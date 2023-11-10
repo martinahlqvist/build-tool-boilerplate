@@ -35,7 +35,8 @@
     "watch": "npm-run-all -p build watch-css watch-js watch-copy",
     "server-start": "browser-sync start --files 'dist' --server 'dist'",
     "server": "npm-run-all -p watch server-start",
-    "deploy-files": "node ./launch-scripts/deploy-files.mjs"
+    "deploy-files": "node ./launch-scripts/deploy-files.mjs",
+    "install-apps": "node ./launch-scripts/install-apps.mjs"
   },
   "devDependencies": {
     "browser-sync": "^2.23.7",
@@ -48,6 +49,9 @@
     "sass": "^1.26.5"
   },
   "dependencies": {
-    "@sitevision/sitevision-scripts": "^2.5.1"
+    "@sitevision/api": "^2023.9.2",
+    "@sitevision/sitevision-scripts": "^2.5.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }

@@ -2,7 +2,7 @@
   "name": "file-handler",
   "version": "0.0.1",
   "dependencies": {
-    "@sitevision/api": "^2023.7.1",
+    "@sitevision/api": "^2023.9.2",
     "@sitevision/sitevision-scripts": "^3.3.3"
   },
   "scripts": {
