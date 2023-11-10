@@ -1,3 +1,5 @@
+.deploy_properties.json
+
 # Node
 node_modules
 dist
