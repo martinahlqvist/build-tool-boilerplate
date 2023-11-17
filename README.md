@@ -236,14 +236,6 @@ cd src/webapps
 npx @sitevision/create-sitevision-app@3 your-app-name
 ```
 
-## Why does this exist?
-
-For years, I've been an avid [Gulp](https://gulpjs.com/) user. Gulp is great. But it's also _a lot_.
-
-**I wanted a simpler, more resilient, leaner set of build tools.**
-
-I'm tired of having to repair my build anytime I don't use it for a few months. I'm tired of installing 270mb of `node_modules` dependencies to build a simple website or web app.
-
-With NPM, you can build a simplish build tool that does just what you want (_and nothing more_) with a fraction of the footprint.
+## Credits
 
 ❤️ _This boilerplate is heavily based on [Build Tool Boilerplate](https://github.com/cferdinandi/build-tool-boilerplate) by Chris Ferdinandi (cferdinandi)_
