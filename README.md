@@ -247,5 +247,3 @@ I'm tired of having to repair my build anytime I don't use it for a few months. 
 With NPM, you can build a simplish build tool that does just what you want (_and nothing more_) with a fraction of the footprint.
 
 ❤️ _This boilerplate is heavily based on [Build Tool Boilerplate](https://github.com/cferdinandi/build-tool-boilerplate) by Chris Ferdinandi (cferdinandi)_
-
-❤️ _Major kudos to Keith Cirkel for [teaching me about this years ago](https://www.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/), before I was ready to hear it._
