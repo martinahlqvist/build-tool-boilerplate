@@ -2,7 +2,7 @@ import * as sass from "sass";
 import fs from "fs";
 import chalk from "chalk";
 import { rollup } from "rollup";
-import { terser } from "rollup-plugin-terser";
+import terser from "@rollup/plugin-terser";
 import path from "path";
 
 // Read package.json
