@@ -209,12 +209,29 @@ npm run deploy-files
 
 ## Core Dependencies
 
-The boilerplate uses [npm-run-all](https://www.npmjs.com/package/npm-run-all) to run tasks consistently across different operating systems, and in parallel.
+BrowserSync, Chokidar CLI, npm-run-all and Recursive FS are core dependencies that are used in multiple tasks. They are included in the boilerplate by default.
+
+Rollup is used to compile and minify JavaScript files.
+
+Sass is used to compile and minify `.scss` files into CSS.
+
+Sitevision API and Sitevision Scripts are used by webApps and restApps.
+
+React and React DOM are used by webApps.
 
 ```json
 {
   "devDependencies": {
-    "npm-run-all": "^4.1.5"
+    "browser-sync": "^2.23.7",
+    "chokidar-cli": "^2.1.0",
+    "npm-run-all": "^4.1.2",
+    "recursive-fs": "^2.1.0",
+    "rollup": "^3.29.4",
+    "sass": "^1.26.5",
+    "@sitevision/api": "^2023.9.2",
+    "@sitevision/sitevision-scripts": "^3.3.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }
 ```
@@ -235,6 +252,25 @@ cd src/webapps
 # Create web or rest app with the following command
 npx @sitevision/create-sitevision-app@3 your-app-name
 ```
+
+### Peer dependencies
+
+***After creattion of webapp and before npm install***
+
+Edit the `package.json` file in the newly created app folder. Change the dependencies to peerDependencies.
+
+By doing this the app will use the dependencies from the root folder instead of installing them locally.
+
+See demoWebApp package.json if uncertain.
+
+Once done run:
+
+```bash
+# In the newly created app folder
+npm install
+```
+
+Now the app will use the dependencies from the root folder and no node_modules folder will be created in the app folder.
 
 ## Credits
 
