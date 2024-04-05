@@ -1,5 +1,5 @@
 {
-  "name": "demoWebApp",
+  "name": "demowebapp",
   "version": "0.0.1",
   "peerDependencies": {
     "@sitevision/api": "^2023.8.1",

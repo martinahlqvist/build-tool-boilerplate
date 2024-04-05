@@ -12,15 +12,15 @@ let sassSrcFolder = "./src/scss/**/*.scss";
 var jsWatcher = chokidar.watch(jsSrcFolder, { persistent: true });
 console.log(chalk.green("⏳ Watching folder " + jsSrcFolder));
 jsWatcher.on("change", function (path) {
-  console.log("Change in : " + path);
-  buildJS();
+	console.log("Change in : " + path);
+	buildJS();
 });
 
 var cssWatcher = chokidar.watch(sassSrcFolder, { persistent: true });
 console.log(chalk.green("⏳ Watching folder " + sassSrcFolder));
 cssWatcher.on("change", function (path) {
-  console.log("Change in  : " + path);
-  buildCSS();
+	console.log("Change in  : " + path);
+	buildCSS();
 });
 
 // Start the server

@@ -5,8 +5,8 @@ import App from "./components/App";
 import type { IAppProps } from "./types";
 
 export default (initialState: IAppProps, el: HTMLElement) => {
-  ReactDOM.hydrate(
-    <App message={initialState.message} name={initialState.name} />,
-    el
-  );
+	ReactDOM.hydrate(
+		<App message={initialState.message} name={initialState.name} />,
+		el
+	);
 };

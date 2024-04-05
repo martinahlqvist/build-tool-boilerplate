@@ -1,10 +1,10 @@
 {
-  "id": "file-handler",
-  "version": "0.0.1",
-  "name": "File Handler",
-  "author": "Martin Ahlqvist",
-  "description": "Handles file uploads",
-  "helpUrl": "#",
-  "type": "RESTApp",
-  "bundled": true
+	"id": "file-handler",
+	"version": "0.0.1",
+	"name": "File Handler",
+	"author": "Martin Ahlqvist",
+	"description": "Handles file uploads",
+	"helpUrl": "#",
+	"type": "RESTApp",
+	"bundled": true
 }

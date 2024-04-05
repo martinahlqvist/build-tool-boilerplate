@@ -11,12 +11,12 @@ import type { Node } from "@sitevision/api/types/javax/jcr/Node";
 
 // Egna typer
 export interface IUploadContent {
-  uri: string;
-  name: string;
+	uri: string;
+	name: string;
 }
 export interface IResult {
-  message: string | unknown;
-  success: boolean;
+	message: string | unknown;
+	success: boolean;
 }
 
 /**
@@ -26,13 +26,13 @@ export interface IResult {
  * @returns null om folder inte finns, noden om den finns
  */
 function checkForFolder(targetFolderNode: Node, folderName: string): Node {
-  let folderNode: Node = nodeTreeUtil.getNode(targetFolderNode, folderName);
+	let folderNode: Node = nodeTreeUtil.getNode(targetFolderNode, folderName);
 
-  if (folderNode === null) {
-    folderNode = folderUtil.createFolder(targetFolderNode, folderName);
-  }
+	if (folderNode === null) {
+		folderNode = folderUtil.createFolder(targetFolderNode, folderName);
+	}
 
-  return folderNode;
+	return folderNode;
 }
 
 /**
@@ -42,41 +42,41 @@ function checkForFolder(targetFolderNode: Node, folderName: string): Node {
  * @returns Ett objekt med meddelande (message) och status (success) boolean
  */
 function uploadFileFromUri(
-  targetFolderNode: Node,
-  uploadContent: IUploadContent
+	targetFolderNode: Node,
+	uploadContent: IUploadContent
 ) {
-  let fileNode: Node = nodeTreeUtil.getNode(
-    targetFolderNode,
-    uploadContent.name
-  );
-  const result: IResult = {
-    message: "no action",
-    success: false,
-  };
+	let fileNode: Node = nodeTreeUtil.getNode(
+		targetFolderNode,
+		uploadContent.name
+	);
+	const result: IResult = {
+		message: "no action",
+		success: false,
+	};
 
-  if (fileNode === null) {
-    try {
-      fileNode = fileUtil.createFile(
-        targetFolderNode,
-        uploadContent.name,
-        uploadContent.uri
-      );
-      result.message = "New file created";
-      result.success = true;
-    } catch (e) {
-      result.message = e;
-    }
-  } else {
-    try {
-      fileUtil.updateBinaryContent(fileNode, uploadContent.uri);
-      result.message = "File updated";
-      result.success = true;
-    } catch (e) {
-      result.message = e;
-    }
-  }
+	if (fileNode === null) {
+		try {
+			fileNode = fileUtil.createFile(
+				targetFolderNode,
+				uploadContent.name,
+				uploadContent.uri
+			);
+			result.message = "New file created";
+			result.success = true;
+		} catch (e) {
+			result.message = e;
+		}
+	} else {
+		try {
+			fileUtil.updateBinaryContent(fileNode, uploadContent.uri);
+			result.message = "File updated";
+			result.success = true;
+		} catch (e) {
+			result.message = e;
+		}
+	}
 
-  return result;
+	return result;
 }
 
 /**
@@ -86,94 +86,94 @@ function uploadFileFromUri(
  * @returns Ett objekt med meddelande (message) och status (success) boolean
  */
 function uploadFileFromTemp(targetFolderNode: Node, tempFile: Node) {
-  const fileName = "" + properties.get(tempFile, "fileName");
-  const fileNode: Node = nodeTreeUtil.getNode(targetFolderNode, fileName);
-  const result: IResult = {
-    message: "no action",
-    success: false,
-  };
+	const fileName = "" + properties.get(tempFile, "fileName");
+	const fileNode: Node = nodeTreeUtil.getNode(targetFolderNode, fileName);
+	const result: IResult = {
+		message: "no action",
+		success: false,
+	};
 
-  if (fileNode === null) {
-    try {
-      fileUtil.createFileFromTemporary(targetFolderNode, tempFile);
-      result.message = "New file created";
-      result.success = true;
-    } catch (e) {
-      result.message = e;
-    }
-  } else {
-    try {
-      fileUtil.updateBinaryContentFromTemporary(fileNode, tempFile);
-      result.message = "File updated";
-      result.success = true;
-    } catch (e) {
-      result.message = e;
-    }
-  }
+	if (fileNode === null) {
+		try {
+			fileUtil.createFileFromTemporary(targetFolderNode, tempFile);
+			result.message = "New file created";
+			result.success = true;
+		} catch (e) {
+			result.message = e;
+		}
+	} else {
+		try {
+			fileUtil.updateBinaryContentFromTemporary(fileNode, tempFile);
+			result.message = "File updated";
+			result.success = true;
+		} catch (e) {
+			result.message = e;
+		}
+	}
 
-  return result;
+	return result;
 }
 
 /**
  * Router för att ladda upp en fil från en extern url till en mapp i filarkivet
  */
 router.post("/createFileFromUri", (req, res) => {
-  const targetFolderNode: Node = appData.getNode("targetFolder");
-  const fileName = req.params.fileName;
-  const fileUri = req.params.fileUri;
-  const subFolder = req.params.subFolder;
+	const targetFolderNode: Node = appData.getNode("targetFolder");
+	const fileName = req.params.fileName;
+	const fileUri = req.params.fileUri;
+	const subFolder = req.params.subFolder;
 
-  let result: IResult = {
-    message: "no action",
-    success: false,
-  };
+	let result: IResult = {
+		message: "no action",
+		success: false,
+	};
 
-  if (!fileName || !fileUri) {
-    result = {
-      message: "Missing parameters",
-      success: false,
-    };
-  } else {
-    if (subFolder) {
-      const subFolderNode = checkForFolder(targetFolderNode, subFolder);
-      result = uploadFileFromUri(subFolderNode, {
-        name: fileName,
-        uri: fileUri,
-      });
-    } else {
-      result = uploadFileFromUri(targetFolderNode, {
-        name: fileName,
-        uri: fileUri,
-      });
-    }
-  }
+	if (!fileName || !fileUri) {
+		result = {
+			message: "Missing parameters",
+			success: false,
+		};
+	} else {
+		if (subFolder) {
+			const subFolderNode = checkForFolder(targetFolderNode, subFolder);
+			result = uploadFileFromUri(subFolderNode, {
+				name: fileName,
+				uri: fileUri,
+			});
+		} else {
+			result = uploadFileFromUri(targetFolderNode, {
+				name: fileName,
+				uri: fileUri,
+			});
+		}
+	}
 
-  res.json(result);
+	res.json(result);
 });
 
 /**
  * Router för att ladda upp en fil från bifogad fil till en mapp i filarkivet
  */
 router.post("/createFileFromTemp", (req, res) => {
-  let result: IResult = {
-    message: "no action",
-    success: false,
-  };
+	let result: IResult = {
+		message: "no action",
+		success: false,
+	};
 
-  const targetFolderNode: Node = appData.getNode("targetFolder");
-  const subFolder = req.params.subFolder;
-  const file = req.file("file");
+	const targetFolderNode: Node = appData.getNode("targetFolder");
+	const subFolder = req.params.subFolder;
+	const file = req.file("file");
 
-  if (file !== null) {
-    if (subFolder !== null || subFolder !== undefined || subFolder !== "") {
-      const subFolderNode = checkForFolder(targetFolderNode, subFolder);
-      result = uploadFileFromTemp(subFolderNode, file);
-    } else {
-      result = uploadFileFromTemp(targetFolderNode, file);
-    }
-  } else {
-    result.message = "No file";
-  }
+	if (file !== null) {
+		if (subFolder !== null || subFolder !== undefined || subFolder !== "") {
+			const subFolderNode = checkForFolder(targetFolderNode, subFolder);
+			result = uploadFileFromTemp(subFolderNode, file);
+		} else {
+			result = uploadFileFromTemp(targetFolderNode, file);
+		}
+	} else {
+		result.message = "No file";
+	}
 
-  res.json(result);
+	res.json(result);
 });

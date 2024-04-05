@@ -69,9 +69,9 @@ _If a `configs.name` property is included, that will be used. If not, the banner
 ```js
 // Banner
 var banner = `/*! ${configs.name ? configs.name : pkg.name} v${
-  pkg.version
+	pkg.version
 } | (c) ${new Date().getFullYear()} ${pkg.author.name} | ${
-  pkg.license
+	pkg.license
 } License | ${pkg.repository.url} */`;
 ```
 
@@ -83,9 +83,9 @@ The boilerplate uses [recursive-fs](https://github.com/simov/recursive-fs) to pr
 
 ```json
 {
-  "devDependencies": {
-    "recursive-fs": "^2.1.0"
-  }
+	"devDependencies": {
+		"recursive-fs": "^2.1.0"
+	}
 }
 ```
 
@@ -103,9 +103,9 @@ The boilerplate uses [recursive-fs](https://www.npmjs.com/package/recursive-fs) 
 
 ```json
 {
-  "devDependencies": {
-    "recursive-fs": "^2.1.0"
-  }
+	"devDependencies": {
+		"recursive-fs": "^2.1.0"
+	}
 }
 ```
 
@@ -142,9 +142,9 @@ The boilerplate uses [Chokidar CLI](https://www.npmjs.com/package/chokidar-cli) 
 
 ```json
 {
-  "devDependencies": {
-    "chokidar-cli": "^2.1.0"
-  }
+	"devDependencies": {
+		"chokidar-cli": "^2.1.0"
+	}
 }
 ```
 
@@ -168,9 +168,9 @@ The boilerplate uses [Browsersync](https://www.browsersync.io/) to run a local s
 
 ```json
 {
-  "devDependencies": {
-    "browser-sync": "^2.26.14"
-  }
+	"devDependencies": {
+		"browser-sync": "^2.26.14"
+	}
 }
 ```
 
@@ -194,10 +194,10 @@ You also need to create a `.deploy_properties.json` file in the root of the proj
 
 ```json
 {
-  "domain": "http://localhost",
-  "distFolder": "./dist",
-  "username": "system",
-  "password": "system"
+	"domain": "http://localhost",
+	"distFolder": "./dist",
+	"username": "system",
+	"password": "system"
 }
 ```
 
@@ -221,18 +221,18 @@ React and React DOM are used by webApps.
 
 ```json
 {
-  "devDependencies": {
-    "browser-sync": "^2.23.7",
-    "chokidar-cli": "^2.1.0",
-    "npm-run-all": "^4.1.2",
-    "recursive-fs": "^2.1.0",
-    "rollup": "^3.29.4",
-    "sass": "^1.26.5",
-    "@sitevision/api": "^2023.9.2",
-    "@sitevision/sitevision-scripts": "^3.3.3",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-  }
+	"devDependencies": {
+		"browser-sync": "^2.23.7",
+		"chokidar-cli": "^2.1.0",
+		"npm-run-all": "^4.1.2",
+		"recursive-fs": "^2.1.0",
+		"rollup": "^3.29.4",
+		"sass": "^1.26.5",
+		"@sitevision/api": "^2023.9.2",
+		"@sitevision/sitevision-scripts": "^3.3.3",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2"
+	}
 }
 ```
 
@@ -255,7 +255,7 @@ npx @sitevision/create-sitevision-app@3 your-app-name
 
 ### Peer dependencies
 
-***After creattion of webapp and before npm install***
+**_After creattion of webapp and before npm install_**
 
 Edit the `package.json` file in the newly created app folder. Change the dependencies to peerDependencies.
 

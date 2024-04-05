@@ -1,7 +1,7 @@
 (() => {
-  const router = require("router");
+	const router = require("router");
 
-  router.get("/", (req, res) => {
-    res.render({});
-  });
+	router.get("/", (req, res) => {
+		res.render({});
+	});
 })();

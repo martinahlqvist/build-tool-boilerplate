@@ -1,58 +1,58 @@
 {
-  "name": "build-tool-boilerplate",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Builds CSS, JS plus Web- and RestApps",
-  "author": {
-    "name": "YOUR NAME",
-    "url": "https://url.com"
-  },
-  "license": "",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/martinahlqvist/build-tool-boilerplate"
-  },
-  "configs": {
-    "css": {
-      "pathIn": "src/scss",
-      "pathOut": "dist/css",
-      "minify": true
-    },
-    "js": {
-      "pathIn": "src/js",
-      "pathOut": "dist/js"
-    }
-  },
-  "scripts": {
-    "clean": "recursive-delete 'dist'",
-    "js": "node ./launch-scripts/js.mjs",
-    "css": "node ./launch-scripts/sass.mjs",
-    "copy": "recursive-copy 'src/copy' 'dist'",
-    "build-dirty": "npm-run-all -p js css copy",
-    "build": "npm-run-all -s clean build-dirty",
-    "watch-css": "chokidar './src/scss/**/*.scss' -c 'npm run css'",
-    "watch-js": "chokidar './src/js/**/*.js' -c 'npm run js'",
-    "watch-copy": "chokidar './src/copy/**/*.*' -c 'npm run copy'",
-    "watch": "npm-run-all -p build watch-css watch-js watch-copy",
-    "server-start": "browser-sync start --files 'dist' --server 'dist'",
-    "server": "npm-run-all -p watch server-start",
-    "deploy-files": "node ./launch-scripts/deploy-files.mjs",
-    "install-apps": "node ./launch-scripts/install-apps.mjs"
-  },
-  "devDependencies": {
-    "browser-sync": "^2.23.7",
-    "chokidar-cli": "^2.1.0",
-    "npm-run-all": "^4.1.2",
-    "recursive-fs": "^2.1.0",
-    "rollup": "^3.29.4",
-    "sass": "^1.26.5",
-    "@sitevision/api": "^2023.9.2",
-    "@sitevision/sitevision-scripts": "^3.3.3",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-  },
-  "workspaces": [
-    "src/webApps/*",
-    "src/restApps/*"
-  ]
+	"name": "build-tool-boilerplate",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Builds CSS, JS plus Web- and RestApps",
+	"author": {
+		"name": "YOUR NAME",
+		"url": "https://url.com"
+	},
+	"license": "",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/martinahlqvist/build-tool-boilerplate"
+	},
+	"configs": {
+		"css": {
+			"pathIn": "src/scss",
+			"pathOut": "dist/css",
+			"minify": true
+		},
+		"js": {
+			"pathIn": "src/js",
+			"pathOut": "dist/js"
+		}
+	},
+	"scripts": {
+		"clean": "recursive-delete 'dist'",
+		"js": "node ./launch-scripts/js.mjs",
+		"css": "node ./launch-scripts/sass.mjs",
+		"copy": "recursive-copy 'src/copy' 'dist'",
+		"build-dirty": "npm-run-all -p js css copy",
+		"build": "npm-run-all -s clean build-dirty",
+		"watch-css": "chokidar './src/scss/**/*.scss' -c 'npm run css'",
+		"watch-js": "chokidar './src/js/**/*.js' -c 'npm run js'",
+		"watch-copy": "chokidar './src/copy/**/*.*' -c 'npm run copy'",
+		"watch": "npm-run-all -p build watch-css watch-js watch-copy",
+		"server-start": "browser-sync start --files 'dist' --server 'dist'",
+		"server": "npm-run-all -p watch server-start",
+		"deploy-files": "node ./launch-scripts/deploy-files.mjs",
+		"install-apps": "node ./launch-scripts/install-apps.mjs"
+	},
+	"devDependencies": {
+		"browser-sync": "^2.23.7",
+		"chokidar-cli": "^2.1.0",
+		"npm-run-all": "^4.1.2",
+		"recursive-fs": "^2.1.0",
+		"rollup": "^3.29.4",
+		"sass": "^1.26.5",
+		"@sitevision/api": "^2023.9.2",
+		"@sitevision/sitevision-scripts": "^3.3.3",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2"
+	},
+	"workspaces": [
+		"src/webApps/*",
+		"src/restApps/*"
+	]
 }
